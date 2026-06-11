@@ -1,0 +1,12 @@
+{
+  "id": "coin",
+  "name": "Sun Coin",
+  "kind": "currency",
+  "description": "A bright pickup item controlled by the world server.",
+  "color": "#f59e0b",
+  "position": {
+    "x": 8,
+    "z": -4
+  },
+  "scale": 0.9
+}

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-label="Grass tile">
+  <rect width="256" height="256" fill="#64a85f"/>
+  <path fill="#78bd70" d="M0 29h256v23H0zM0 137h256v19H0zM0 219h256v21H0z"/>
+  <path fill="#4d924e" d="M38 0h19v256H38zM141 0h15v256h-15zM218 0h18v256h-18z"/>
+  <path fill="none" stroke="#2f7c47" stroke-linecap="round" stroke-width="8" d="M29 73c18-14 42-14 61 0M168 47c15 17 35 22 59 12M86 184c26-9 50-5 72 13M21 207c15 12 33 14 52 5M175 159c18-14 38-16 61-4"/>
+  <circle cx="102" cy="94" r="8" fill="#d9f99d"/>
+  <circle cx="203" cy="197" r="6" fill="#bbf7d0"/>
+  <circle cx="54" cy="166" r="5" fill="#dcfce7"/>
+</svg>

@@ -1,0 +1,13 @@
+{
+  "id": "crystal",
+  "name": "Blue Crystal",
+  "kind": "resource",
+  "description": "A server-defined item loaded from server/items.",
+  "color": "#38bdf8",
+  "asset": "player-token.svg",
+  "position": {
+    "x": -7,
+    "z": 5
+  },
+  "scale": 1.15
+}
