@@ -1,0 +1,29 @@
+{
+  "id": "tree",
+  "type": "tree",
+  "name": "Tree",
+  "render": {
+    "shape": "tree",
+    "parts": [
+      {
+        "id": "trunk",
+        "shape": "cylinder",
+        "color": "#7c4a2d",
+        "position": { "y": 1.2 },
+        "size": { "topRadius": 0.34, "bottomRadius": 0.48, "height": 2.4 },
+        "material": { "roughness": 0.8 }
+      },
+      {
+        "id": "leaves",
+        "shape": "cone",
+        "color": "#1f8f4f",
+        "position": { "y": 3.2 },
+        "size": { "radius": 1.8, "height": 3.4 },
+        "material": { "roughness": 0.7 }
+      }
+    ]
+  },
+  "collision": {
+    "radius": 1.25
+  }
+}

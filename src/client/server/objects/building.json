@@ -1,0 +1,30 @@
+{
+  "id": "building",
+  "type": "building",
+  "name": "Building",
+  "render": {
+    "shape": "building",
+    "parts": [
+      {
+        "id": "walls",
+        "shape": "box",
+        "color": "#d6b48a",
+        "position": { "y": 1.4 },
+        "size": { "x": 5.4, "y": 2.8, "z": 4.2 },
+        "material": { "texture": "grass-tile.svg", "textureRepeat": { "x": 2, "y": 1 }, "roughness": 0.72 }
+      },
+      {
+        "id": "roof",
+        "shape": "cone",
+        "color": "#8b3a2e",
+        "position": { "y": 3.25 },
+        "rotation": { "y": 0.785 },
+        "size": { "radius": 4.2, "height": 1.8 },
+        "material": { "roughness": 0.7 }
+      }
+    ]
+  },
+  "collision": {
+    "radius": 3.6
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "id": "crystal-spire",
+  "type": "crystal-spire",
+  "name": "Crystal Spire",
+  "render": {
+    "shape": "custom",
+    "color": "#38bdf8",
+    "parts": [
+      {
+        "id": "main-crystal",
+        "shape": "octahedron",
+        "color": "#38bdf8",
+        "position": { "y": 1.4 },
+        "scale": { "x": 0.8, "y": 2.4, "z": 0.8 },
+        "size": { "radius": 0.8 },
+        "material": { "roughness": 0.18, "metalness": 0.08, "emissive": "#0ea5e9", "emissiveIntensity": 0.35 }
+      },
+      {
+        "id": "small-crystal-a",
+        "shape": "octahedron",
+        "color": "#a78bfa",
+        "position": { "x": 0.9, "y": 0.75, "z": 0.25 },
+        "rotation": { "z": 0.4 },
+        "scale": { "x": 0.45, "y": 1.1, "z": 0.45 },
+        "size": { "radius": 0.55 },
+        "material": { "roughness": 0.2, "emissive": "#7c3aed", "emissiveIntensity": 0.18 }
+      },
+      {
+        "id": "small-crystal-b",
+        "shape": "octahedron",
+        "color": "#67e8f9",
+        "position": { "x": -0.75, "y": 0.65, "z": -0.35 },
+        "rotation": { "z": -0.25 },
+        "scale": { "x": 0.4, "y": 0.9, "z": 0.4 },
+        "size": { "radius": 0.5 },
+        "material": { "roughness": 0.2, "emissive": "#22d3ee", "emissiveIntensity": 0.18 }
+      }
+    ]
+  },
+  "collision": {
+    "radius": 1.4
+  }
+}

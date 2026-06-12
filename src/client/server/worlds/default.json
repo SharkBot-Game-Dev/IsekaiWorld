@@ -1,0 +1,38 @@
+{
+  "id": "default",
+  "name": "Default Meadow",
+  "size": 84,
+  "bounds": {
+    "minX": -32,
+    "maxX": 32,
+    "minZ": -32,
+    "maxZ": 32
+  },
+  "spawn": {
+    "x": 0,
+    "z": 0
+  },
+  "objects": [
+    { "id": "lake", "object": "water", "name": "Lake", "position": { "x": -18, "z": -16 } },
+    { "id": "cabin", "object": "building", "name": "Cabin", "position": { "x": 2, "z": -24 }, "rotation": 0.785 },
+    { "id": "portal-to-crystal-grove", "object": "portal", "name": "Crystal Portal", "position": { "x": 14, "z": 0 }, "portal": { "targetWorld": "crystal-grove", "triggerRadius": 2.4, "target": { "x": -9, "z": 0 } } },
+    { "id": "tree-01", "object": "tree", "position": { "x": -27, "z": -23 } },
+    { "id": "tree-02", "object": "tree", "position": { "x": -23, "z": 18 } },
+    { "id": "tree-03", "object": "tree", "position": { "x": -16, "z": 24 } },
+    { "id": "tree-04", "object": "tree", "position": { "x": -8, "z": -27 } },
+    { "id": "tree-05", "object": "tree", "position": { "x": 9, "z": 25 } },
+    { "id": "tree-06", "object": "tree", "position": { "x": 19, "z": -24 } },
+    { "id": "tree-07", "object": "tree", "position": { "x": 26, "z": 14 } },
+    { "id": "tree-08", "object": "tree", "position": { "x": 30, "z": -8 } },
+    { "id": "tree-09", "object": "tree", "position": { "x": -30, "z": 4 } },
+    { "id": "tree-10", "object": "tree", "position": { "x": 13, "z": -16 } },
+    { "id": "tree-11", "object": "tree", "position": { "x": -12, "z": 13 } },
+    { "id": "tree-12", "object": "tree", "position": { "x": 22, "z": 27 } },
+    { "id": "rock-01", "object": "rock", "position": { "x": -21, "z": -5 }, "scale": 1 },
+    { "id": "rock-02", "object": "rock", "position": { "x": -5, "z": -18 }, "scale": 1.2, "collision": { "radius": 1.3 } },
+    { "id": "rock-03", "object": "rock", "position": { "x": 5, "z": 15 }, "scale": 1.4, "collision": { "radius": 1.45 } },
+    { "id": "rock-04", "object": "rock", "position": { "x": 17, "z": 6 }, "scale": 1 },
+    { "id": "rock-05", "object": "rock", "position": { "x": 28, "z": -18 }, "scale": 1.2, "collision": { "radius": 1.3 } },
+    { "id": "rock-06", "object": "rock", "position": { "x": -29, "z": 14 }, "scale": 1.4, "collision": { "radius": 1.45 } }
+  ]
+}

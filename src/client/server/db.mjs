@@ -27,6 +27,15 @@ db.exec(`
     system INTEGER NOT NULL DEFAULT 0,
     created_at INTEGER NOT NULL
   );
+
+  CREATE TABLE IF NOT EXISTS inventory_items (
+    save_id TEXT NOT NULL,
+    item_id TEXT NOT NULL,
+    quantity INTEGER NOT NULL DEFAULT 0,
+    equipped INTEGER NOT NULL DEFAULT 0,
+    updated_at INTEGER NOT NULL,
+    PRIMARY KEY (save_id, item_id)
+  );
 `)
 
 const loadPlayerStatement = db.prepare(`
@@ -58,6 +67,49 @@ const listRecentChatStatement = db.prepare(`
   LIMIT ?
 `)
 
+const listInventoryStatement = db.prepare(`
+  SELECT item_id AS itemId, quantity, equipped
+  FROM inventory_items
+  WHERE save_id = ? AND quantity > 0
+  ORDER BY equipped DESC, updated_at ASC
+`)
+
+const getInventoryItemStatement = db.prepare(`
+  SELECT item_id AS itemId, quantity, equipped
+  FROM inventory_items
+  WHERE save_id = ? AND item_id = ?
+`)
+
+const addInventoryItemStatement = db.prepare(`
+  INSERT INTO inventory_items (save_id, item_id, quantity, equipped, updated_at)
+  VALUES (?, ?, ?, 0, ?)
+  ON CONFLICT(save_id, item_id) DO UPDATE SET
+    quantity = inventory_items.quantity + excluded.quantity,
+    updated_at = excluded.updated_at
+`)
+
+const decrementInventoryItemStatement = db.prepare(`
+  UPDATE inventory_items
+  SET quantity = quantity - 1,
+      equipped = CASE WHEN quantity - 1 <= 0 THEN 0 ELSE equipped END,
+      updated_at = ?
+  WHERE save_id = ? AND item_id = ? AND quantity > 0
+`)
+
+const clearEquippedStatement = db.prepare(`
+  UPDATE inventory_items
+  SET equipped = 0,
+      updated_at = ?
+  WHERE save_id = ?
+`)
+
+const equipInventoryItemStatement = db.prepare(`
+  UPDATE inventory_items
+  SET equipped = 1,
+      updated_at = ?
+  WHERE save_id = ? AND item_id = ? AND quantity > 0
+`)
+
 export function loadPlayerSave(saveId) {
   if (!saveId) return null
   return loadPlayerStatement.get(saveId) ?? null
@@ -86,8 +138,43 @@ export function listRecentChat(limit = 50) {
     .map((message) => ({ ...message, system: Boolean(message.system) }))
 }
 
+export function listInventory(saveId, itemCatalog = []) {
+  if (!saveId) return []
+  const catalog = new Map(itemCatalog.map((item) => [item.id, item]))
+  return listInventoryStatement.all(saveId).map((row) => ({
+    ...catalog.get(row.itemId),
+    id: row.itemId,
+    quantity: Number(row.quantity),
+    equipped: Boolean(row.equipped),
+  }))
+}
+
+export function addInventoryItem(saveId, itemId, quantity = 1) {
+  if (!saveId || !itemId) return
+  addInventoryItemStatement.run(saveId, itemId, quantity, Date.now())
+}
+
+export function useInventoryItem(saveId, itemId) {
+  if (!saveId || !itemId) return false
+  const current = getInventoryItemStatement.get(saveId, itemId)
+  if (!current || current.quantity <= 0) return false
+  decrementInventoryItemStatement.run(Date.now(), saveId, itemId)
+  return true
+}
+
+export function equipInventoryItem(saveId, itemId) {
+  if (!saveId || !itemId) return false
+  const current = getInventoryItemStatement.get(saveId, itemId)
+  if (!current || current.quantity <= 0) return false
+  const now = Date.now()
+  clearEquippedStatement.run(now, saveId)
+  equipInventoryItemStatement.run(now, saveId, itemId)
+  return true
+}
+
 export function getSaveStats() {
   const players = db.prepare('SELECT COUNT(*) AS count FROM player_saves').get().count
   const messages = db.prepare('SELECT COUNT(*) AS count FROM chat_messages').get().count
-  return { dbPath, players, messages }
+  const inventory = db.prepare('SELECT COUNT(*) AS count FROM inventory_items WHERE quantity > 0').get().count
+  return { dbPath, players, messages, inventory }
 }

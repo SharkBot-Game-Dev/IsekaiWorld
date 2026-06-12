@@ -1,0 +1,23 @@
+{
+  "id": "water",
+  "type": "water",
+  "name": "Water",
+  "render": {
+    "shape": "water",
+    "color": "#44b8d8",
+    "parts": [
+      {
+        "id": "surface",
+        "shape": "circle",
+        "color": "#44b8d8",
+        "position": { "y": -0.34 },
+        "rotation": { "x": -1.5708 },
+        "size": { "radius": 7.2 },
+        "material": { "roughness": 0.25, "metalness": 0.05 }
+      }
+    ]
+  },
+  "collision": {
+    "radius": 7.2
+  }
+}

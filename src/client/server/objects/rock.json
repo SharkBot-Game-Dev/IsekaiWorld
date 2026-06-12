@@ -1,0 +1,23 @@
+{
+  "id": "rock",
+  "type": "rock",
+  "name": "Rock",
+  "render": {
+    "shape": "rock",
+    "parts": [
+      {
+        "id": "body",
+        "shape": "dodecahedron",
+        "color": "#64748b",
+        "position": { "y": 0.55 },
+        "rotation": { "x": 0.4, "y": 0.7, "z": 0.18 },
+        "scale": { "y": 0.72 },
+        "size": { "radius": 1.1 },
+        "material": { "roughness": 0.88 }
+      }
+    ]
+  },
+  "collision": {
+    "radius": 1.2
+  }
+}

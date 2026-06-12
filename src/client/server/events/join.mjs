@@ -1,4 +1,12 @@
-export function handleJoin({ player, pushChat, broadcastPlayers, loadPlayerSave, savePlayer, sanitize }, payload) {
+export async function handleJoin({
+  broadcastInventory,
+  broadcastPlayers,
+  loadPlayerSave,
+  player,
+  pushChat,
+  savePlayer,
+  sanitize,
+}, payload) {
   const saveId = sanitize(String(payload.saveId || ''), 80)
   const save = loadPlayerSave(saveId)
 
@@ -14,6 +22,7 @@ export function handleJoin({ player, pushChat, broadcastPlayers, loadPlayerSave,
   }
 
   savePlayer(player)
+  await broadcastInventory(player)
   pushChat({ name: 'World', text: `${player.name} connected.`, system: true })
   broadcastPlayers()
 }

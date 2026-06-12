@@ -13,6 +13,8 @@ By default, the client connects to `ws://127.0.0.1:8787/world`. To use another w
 
 The client renders a 3D world with terrain height, props, server-defined items, and a follow camera. Player save data and recent chat are stored in SQLite at `server/data/world.sqlite`.
 
+Inventory is also stored in SQLite. The client can pick up nearby world items, equip inventory items, and use them. Using an item consumes one quantity; equipping marks one inventory item as active for the current save.
+
 Server-side WebSocket event handlers live in `server/events`. Server-owned image assets live in `server/assets` and are served from `http://127.0.0.1:8787/assets/<file>`. The asset manifest is available at `http://127.0.0.1:8787/assets`.
 
 Server-defined item settings live in `server/items` as JSON files and are served from `http://127.0.0.1:8787/items`. Items are included in the WebSocket `welcome` payload and rendered in the client world.

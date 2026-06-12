@@ -1,0 +1,47 @@
+{
+  "id": "portal",
+  "type": "portal",
+  "name": "Portal",
+  "render": {
+    "shape": "portal",
+    "color": "#8b5cf6",
+    "parts": [
+      {
+        "id": "base",
+        "shape": "ring",
+        "color": "#8b5cf6",
+        "position": { "y": 0.08 },
+        "rotation": { "x": -1.5708 },
+        "size": { "radius": 0.8, "tube": 0.55 },
+        "material": { "kind": "basic", "opacity": 0.34, "transparent": true }
+      },
+      {
+        "id": "ring",
+        "shape": "torus",
+        "color": "#8b5cf6",
+        "position": { "y": 1.45 },
+        "rotation": { "y": 1.5708 },
+        "size": { "radius": 1.15, "tube": 0.1 },
+        "material": { "roughness": 0.24, "metalness": 0.2, "emissive": "#8b5cf6", "emissiveIntensity": 0.28 },
+        "animate": "spin"
+      },
+      {
+        "id": "core",
+        "shape": "circle",
+        "color": "#8b5cf6",
+        "position": { "y": 1.45 },
+        "rotation": { "y": 1.5708 },
+        "size": { "radius": 0.95 },
+        "material": { "kind": "basic", "opacity": 0.28, "transparent": true },
+        "animate": "pulse"
+      }
+    ]
+  },
+  "collision": {
+    "radius": 0
+  },
+  "portal": {
+    "targetWorld": "default",
+    "triggerRadius": 2.2
+  }
+}
