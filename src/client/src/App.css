@@ -126,16 +126,20 @@
   height: 18px;
 }
 
-.pickup-prompt {
+.pickup-prompt-wrap {
   position: absolute;
   left: 50%;
   bottom: 140px;
+  translate: -50% 0;
+  pointer-events: none;
+}
+
+.pickup-prompt {
   min-height: 38px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  translate: -50% 0;
   padding: 8px 12px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 8px;
@@ -146,6 +150,14 @@
   pointer-events: none;
   text-shadow: 0 1px 2px rgba(15, 23, 42, 0.7);
   backdrop-filter: blur(12px);
+}
+
+.pickup-prompt.active {
+  pointer-events: auto;
+}
+
+.pickup-prompt.active:hover {
+  background: rgba(20, 83, 72, 0.84);
 }
 
 .prompt-key {
@@ -464,7 +476,7 @@ button:disabled {
     inset: 12px 12px auto;
   }
 
-  .pickup-prompt {
+  .pickup-prompt-wrap {
     bottom: 118px;
   }
 
@@ -509,7 +521,7 @@ button:disabled {
     font-size: 26px;
   }
 
-  .pickup-prompt {
+  .pickup-prompt-wrap {
     right: 12px;
     bottom: 116px;
     left: 12px;

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState, type FormEvent } from 'react'
 import * as THREE from 'three'
 import './App.css'
 
@@ -236,6 +236,16 @@ function App() {
     nearbyItemId.current = nearbyItem?.id ?? null
   }, [nearbyItem])
 
+  const requestPickup = useCallback((itemId: string) => {
+    if (socketRef.current?.readyState !== WebSocket.OPEN) return
+    socketRef.current.send(JSON.stringify({ type: 'move', ...localPosition.current }))
+    window.setTimeout(() => {
+      if (socketRef.current?.readyState === WebSocket.OPEN) {
+        socketRef.current.send(JSON.stringify({ type: 'pickup', itemId }))
+      }
+    }, 60)
+  }, [])
+
   useEffect(() => {
     localStorage.setItem('isekai-name', name)
   }, [name])
@@ -407,7 +417,7 @@ function App() {
       window.removeEventListener('mousemove', updateLook)
       if (document.pointerLockElement === mount) document.exitPointerLock()
     }
-  }, [])
+  }, [requestPickup])
 
   useEffect(() => {
     if (serverAssets.length === 0) return
@@ -535,7 +545,7 @@ function App() {
       if (key === ' ' || key === 'shift') event.preventDefault()
       if (key === 'e') {
         const itemId = nearbyItemId.current
-        if (itemId) send({ type: 'pickup', itemId })
+        if (itemId) requestPickup(itemId)
       }
       if (key === 'shift') {
         isRunning.current = true
@@ -597,7 +607,7 @@ function App() {
       window.removeEventListener('keyup', up)
       window.clearInterval(timer)
     }
-  }, [])
+  }, [requestPickup])
 
   useEffect(() => {
     const mount = mountRef.current as (HTMLDivElement & { sceneState?: { scene: THREE.Scene } }) | null
@@ -747,14 +757,16 @@ function App() {
           )}
         </div>
         <div className="crosshair" aria-hidden="true" />
-        <div className="pickup-prompt" aria-live="polite">
+        <div className="pickup-prompt-wrap" aria-live="polite">
           {nearbyItem ? (
-            <>
+            <button type="button" className="pickup-prompt active" onClick={() => requestPickup(nearbyItem.id)}>
               <span className="prompt-key">E</span>
               <span>Take {nearbyItem.name}</span>
-            </>
+            </button>
           ) : (
-            <span>Look around for items</span>
+            <div className="pickup-prompt">
+              <span>Look around for items</span>
+            </div>
           )}
         </div>
         <section className="ingame-inventory" aria-label="In-game item list">
